@@ -1,13 +1,14 @@
 #include <stdio.h>
 
 
-int main()
-{
-    time date1;
-    date1.date_instance.year = 1996;
-    date1.today_time_instance.hours = 12;
-    printf("Date: %d-%d-%d\n", date1.date_instance.year, date1.date_instance.month, date1.date_instance.day);
-    printf("Time: %d:%d:%d\n", date1.today_time_instance.hours, date1.today_time_instance.minutes, date1.today_time_instance.seconds);
-
+int main() {
+    time t1 = {2025, 1, 28, 14, 30, 45};
+    time t2 = {2025, 1, 28, 15, 20, 10};
+    
+    time later = later_time(&t1, &t2);
+    
+    printf("The later time is:\n");
+    print_time(&later);
+    
     return 0;
 }
