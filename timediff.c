@@ -1,14 +1,15 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 
 int main() {
-    time t1 = {2025, 1, 28, 14, 30, 45};
-    time t2 = {2025, 1, 28, 15, 20, 10};
+    char *later = malloc(3 * sizeof(char));
+    Time t1 = {2025, 2, 28, 14, 30, 45};
+    Time t2 = {2025, 1, 28, 15, 20, 10};
     
-    time later = later_time(&t1, &t2);
+    later = later_time(&t1, &t2);
     
-    printf("The later time is:\n");
-    print_time(&later);
+    printf("\nThe later time is:\n%s", later);
+    
     
     return 0;
 }
