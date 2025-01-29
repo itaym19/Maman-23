@@ -6,3 +6,5 @@ typedef struct {
     int minutes;
     int seconds;
 } time;
+
+char* later_time(const Time* t1, const Time* t2);
