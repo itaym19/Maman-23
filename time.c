@@ -56,22 +56,23 @@ int get_days_in_month(int month) {
     return 0;  /* Invalid month */
 }
 
-// Convert the given time to the total number of seconds since 1/1/0
+/* Convert the given time to the total number of seconds since 1/1/0 */
 long long time_to_seconds(const Time* t) {
     long long total_seconds = 0;
+    int month;
 
-    // Add the seconds for the years
-    total_seconds += (t->year) * 365 * 24 * 60 * 60;  // each year has 365 days (simplified)
+    /* Add the seconds for the years */
+    total_seconds += (t->year) * 365 * 24 * 60 * 60;  
     
-    // Add seconds for the months of the current year
-    for (int month = 1; month < t->month; month++) {
-        total_seconds += get_days_in_month(month, t->year) * 24 * 60 * 60;
+    /* Add seconds for the months of the current year */
+    for (month = 1; month < t->month; month++) {
+        total_seconds += get_days_in_month(month) * 24 * 60 * 60;
     }
 
-    // Add seconds for the days of the current month
+    /* Add seconds for the days of the current month */
     total_seconds += (t->day - 1) * 24 * 60 * 60;
 
-    // Add seconds for the hours, minutes, and seconds
+    /* Add seconds for the hours, minutes, and seconds */
     total_seconds += t->hours * 60 * 60;
     total_seconds += t->minutes * 60;
     total_seconds += t->seconds;
@@ -79,9 +80,3 @@ long long time_to_seconds(const Time* t) {
     return total_seconds;
 }
 
-// Function to get the difference between two times in seconds
-long long time_difference_in_seconds(const Time* t1, const Time* t2) {
-    long long t1_seconds = time_to_seconds(t1);
-    long long t2_seconds = time_to_seconds(t2);
-    return t2_seconds - t1_seconds;
-}
