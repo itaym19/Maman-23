@@ -9,8 +9,8 @@ int main() {
     Time time2 = {-2, 1, 21, 15, 20, 10};
     
     later = later_time(&time1, &time2);
-    date1_seconds = time_to_seconds(&time1);
-    date2_seconds = time_to_seconds_negative_years(&time2);
+    date1_seconds = (time1.year >= 0)? time_to_seconds(&time1): time_to_seconds_negative_years(&time1);
+    date2_seconds = (time2.year >= 0)? time_to_seconds(&time2): time_to_seconds_negative_years(&time2);
     
     printf("\nThe later time is:\n%s", later);
     printf("\ntime1 in seconds:\n%ld", date1_seconds);
