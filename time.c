@@ -16,28 +16,28 @@ char* later_time(const Time* t1, const Time* t2) {
         return "t2";
     }
     
-    // If months are equal, compare day
+    /* If months are equal, compare day */
     if (t1->day > t2->day) {
         return "t1";
     } else if (t1->day < t2->day) {
         return "t2";
     }
     
-    // If days are equal, compare hours
+    /* If days are equal, compare hours */
     if (t1->hours > t2->hours) {
         return "t1";
     } else if (t1->hours < t2->hours) {
         return "t2";
     }
     
-    // If hours are equal, compare minutes
+    /* If hours are equal, compare minutes */
     if (t1->minutes > t2->minutes) {
         return "t1";
     } else if (t1->minutes < t2->minutes) {
         return "t2";
     }
     
-    // If minutes are equal, compare seconds
+    /* If minutes are equal, compare seconds */
     if (t1->seconds > t2->seconds) {
         return "t1";
     } else {
@@ -57,22 +57,22 @@ int get_days_in_month(int month) {
     return 0;  /* Invalid month */
 }
 
-// Convert the given time to the total number of seconds since 1/1/0
+/* Convert the given time to the total number of seconds since 1/1/0 */
 long time_to_seconds(const Time* t) {
     long total_seconds = 0;
 
-    // Add the seconds for the years
-    total_seconds += (t->year) * 365 * 24 * 60 * 60;  // each year has 365 days (simplified)
+    /* Add the seconds for the years */
+    total_seconds += (t->year) * 365 * 24 * 60 * 60;  
     
-    // Add seconds for the months of the current year
+    /* Add seconds for the months of the current year */
     for (int month = 1; month < t->month; month++) {
         total_seconds += get_days_in_month(month) * 24 * 60 * 60;
     }
 
-    // Add seconds for the days of the current month
+    /* Add seconds for the days of the current month */
     total_seconds += (t->day - 1) * 24 * 60 * 60;
 
-    // Add seconds for the hours, minutes, and seconds
+    /* Add seconds for the hours, minutes, and seconds */
     total_seconds += t->hours * 60 * 60;
     total_seconds += t->minutes * 60;
     total_seconds += t->seconds;
