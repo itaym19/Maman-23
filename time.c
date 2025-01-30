@@ -1,5 +1,6 @@
-#incllude <stdio.h>
+#include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 char* later_time(const Time* t1, const Time* t2) {
     /* Compare year */
