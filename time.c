@@ -6,44 +6,44 @@
 char* later_time(const Time* t1, const Time* t2) {
     /* Compare year */
     if (t1->year > t2->year) {
-        return "t1";
+        return "time1";
     } else if (t1->year < t2->year) {
-        return "t2";
+        return "time2";
     }
     
     /* If years are equal, compare month */
     if (t1->month > t2->month) {
-        return "t1";
+        return "time1";
     } else if (t1->month < t2->month) {
-        return "t2";
+        return "time2";
     }
     
     /* If months are equal, compare day */
     if (t1->day > t2->day) {
-        return "t1";
+        return "time1";
     } else if (t1->day < t2->day) {
-        return "t2";
+        return "time2";
     }
     
     /* If days are equal, compare hours */
     if (t1->hours > t2->hours) {
-        return "t1";
+        return "time1";
     } else if (t1->hours < t2->hours) {
-        return "t2";
+        return "time2";
     }
     
     /* If hours are equal, compare minutes */
     if (t1->minutes > t2->minutes) {
-        return "t1";
+        return "time1";
     } else if (t1->minutes < t2->minutes) {
-        return "t2";
+        return "time2";
     }
     
     /* If minutes are equal, compare seconds */
     if (t1->seconds > t2->seconds) {
-        return "t1";
+        return "time1";
     } else {
-        return "t2";
+        return "time2";
     }
 }
 
@@ -111,13 +111,14 @@ void time_difference_in_seconds(const Time* time1, const Time* time2) {
     long time1_seconds = (time1->year >= 0)? time_to_seconds(time1): time_to_seconds_negative_years(time1);
     long time2_seconds = (time2->year >= 0)? time_to_seconds(time2): time_to_seconds_negative_years(time2);
     long timeDifference = 0;
-    char *later = malloc(3 * sizeof(char));
+    char *later = malloc(6 * sizeof(char));
     later = later_time(time1, time2);
     
-    printf("\ntime1 in seconds:\n%ld", time1_seconds);
-    printf("\ntime2 in seconds:\n%ld", time2_seconds);
+    printf("\nthe later time is %s \n", later);
+    printf("\ndifference between time1 and year zero in seconds:\n%ld \n", time1_seconds);
+    printf("\ndifference between time2 and year zero in seconds:\n%ld \n", time2_seconds);
     
-    if (later == "t1") {  /* time1 is the later time */
+    if (later == "time1") {  /* time1 is the later time */
         if (time1->year >= 0) {  /* time1 is positive */
          if (time2->year >= 0) {  /* time1 and time2 are positive */
              timeDifference = time1_seconds - time2_seconds;
@@ -130,7 +131,7 @@ void time_difference_in_seconds(const Time* time1, const Time* time2) {
             timeDifference = abs(time1_seconds - time2_seconds);
         }
     }
-    else if (later == "t2") {  /* time1 is the later time */
+    else if (later == "time2") {  /* time1 is the later time */
         if (time2->year >= 0) {  /* time2 is positive */
             if (time1->year >= 0) {  /* time2 and time1 are positive */
                 timeDifference = time2_seconds - time1_seconds;
@@ -145,7 +146,7 @@ void time_difference_in_seconds(const Time* time1, const Time* time2) {
     }
     else perror("error calculating time difference");  /* error finding later time */
     
-    printf("\ntime difference in seconds:\n%ld", timeDifference);
+    printf("\ndifference between time1 and time2 in seconds:\n%ld", timeDifference);
 }
 
 /* Helper function to print a time object */
