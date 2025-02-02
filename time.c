@@ -1,6 +1,8 @@
-#incllude <stdio.h>
+#include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
+/* Helper function to decide later time between 2 time objects */
 char* later_time(const Time* t1, const Time* t2) {
     /* Compare year */
     if (t1->year > t2->year) {
@@ -104,9 +106,49 @@ long time_to_seconds_negative_years(const Time* t) {
     return total_seconds;
 }
 
-// Function to get the difference between two times in seconds
-long time_difference_in_seconds(const Time* t1, const Time* t2) {
-    long t1_seconds = time_to_seconds(t1);
-    long t2_seconds = time_to_seconds(t2);
-    return t2_seconds - t1_seconds;
+/* Function to get the difference between two times in seconds */
+void time_difference_in_seconds(const Time* time1, const Time* time2) {
+    long time1_seconds = (time1->year >= 0)? time_to_seconds(time1): time_to_seconds_negative_years(time1);
+    long time2_seconds = (time2->year >= 0)? time_to_seconds(time2): time_to_seconds_negative_years(time2);
+    long timeDifference = 0;
+    char *later = malloc(3 * sizeof(char));
+    later = later_time(time1, time2);
+    
+    printf("\ntime1 in seconds:\n%ld", time1_seconds);
+    printf("\ntime2 in seconds:\n%ld", time2_seconds);
+    
+    if (later == "t1") {  /* time1 is the later time */
+        if (time1->year >= 0) {  /* time1 is positive */
+         if (time2->year >= 0) {  /* time1 and time2 are positive */
+             timeDifference = time1_seconds - time2_seconds;
+         } 
+         else {  /* time1 is positive and time2 is negative */
+             timeDifference = time1_seconds + time2_seconds;
+         }
+        }
+        else {  /* time1 is negative */
+            timeDifference = abs(time1_seconds - time2_seconds);
+        }
+    }
+    else if (later == "t2") {  /* time1 is the later time */
+        if (time2->year >= 0) {  /* time2 is positive */
+            if (time1->year >= 0) {  /* time2 and time1 are positive */
+                timeDifference = time2_seconds - time1_seconds;
+            }
+            else {  /* time2 is positive and time1 is negative */
+                timeDifference = time2_seconds + time1_seconds;
+            }
+        }
+        else {  /* time2 is negative */
+            timeDifference = abs(time2_seconds - time1_seconds);
+        }
+    }
+    else perror("error calculating time difference");  /* error finding later time */
+    
+    printf("\ntime difference in seconds:\n%ld", timeDifference);
+}
+
+/* Helper function to print a time object */
+void print_time(Time *t1) {
+    printf("year: %d, month: %d, day: %d, hours: %d, minutes: %d, seconds: %d \n", t1->year, t1->month, t1->day, t1->hours, t1->minutes, t1->seconds);
 }
