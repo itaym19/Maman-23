@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include "time.h"
 
 int main(int argc, char *argv[]) {
     /* making sure there is exactly 1 file as an argument */
