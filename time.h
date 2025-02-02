@@ -12,3 +12,4 @@ int get_days_in_month(int month);
 long time_to_seconds(const Time* t);
 long time_to_seconds_negative_years(const Time* t);
 void time_difference_in_seconds(const Time* time1, const Time* time2);
+void print_time(Time *t1);
