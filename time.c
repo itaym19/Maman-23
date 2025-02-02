@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
+/* Helper function to decide later time between 2 time objects */
 char* later_time(const Time* t1, const Time* t2) {
     /* Compare year */
     if (t1->year > t2->year) {
@@ -147,6 +148,7 @@ void time_difference_in_seconds(const Time* time1, const Time* time2) {
     printf("\ntime difference in seconds:\n%ld", timeDifference);
 }
 
+/* Helper function to print a time object */
 void print_time(Time *t1) {
     printf("year: %d, month: %d, day: %d, hours: %d, minutes: %d, seconds: %d \n", t1->year, t1->month, t1->day, t1->hours, t1->minutes, t1->seconds);
 }
